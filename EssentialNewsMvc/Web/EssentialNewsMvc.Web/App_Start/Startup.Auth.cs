@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EssentialNewsMvc.Data;
+using EssentialNewsMvc.Data.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using EssentialNewsMvc.Web.Models;
+using System;
 
 namespace EssentialNewsMvc.Web
 {

@@ -1,4 +1,4 @@
-﻿using EssentialNewsMvc.Web.Models;
+﻿using EssentialNewsMvc.Data.Models;
 using EssentialNewsMvc.Web.ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
