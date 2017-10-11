@@ -14,6 +14,15 @@ namespace EssentialNewsMvc.Data
         {
         }
 
+        public IDbSet<NewsArticle> NewsArticles { get; set; }
+
+        public IDbSet<NewsCategory> Categories { get; set; }
+
+        public IDbSet<Region> Regions { get; set; }
+
+        public IDbSet<Visit> Visits { get; set; }
+
+        public IDbSet<Image> Images { get; set; }
 
         public static ApplicationDbContext Create()
         {
