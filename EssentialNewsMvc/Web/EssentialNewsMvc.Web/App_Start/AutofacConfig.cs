@@ -1,6 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using EssentialNewsMvc.Data;
+using EssentialNewsMvc.Data.Common;
+using EssentialNewsMvc.Services.Data.Contracts;
+using EssentialNewsMvc.Services.Infrastructure.Contracts;
 using System.Data.Entity;
 using System.Reflection;
 using System.Web.Mvc;
@@ -43,15 +46,15 @@ namespace EssentialNewsMvc.Web.App_Start
                 .As<DbContext>()
                 .InstancePerRequest();
 
-            //builder.RegisterGeneric(typeof(DbRepository<>))
-            //    .As(typeof(IDbRepository<>))
-            //    .InstancePerRequest();
+            builder.RegisterGeneric(typeof(DbRepository<>))
+                .As(typeof(IDbRepository<>))
+                .InstancePerRequest();
 
-            //var servicesAssembly = Assembly.GetAssembly(typeof(INewsService));
-            //builder.RegisterAssemblyTypes(servicesAssembly).AsImplementedInterfaces();
+            var servicesAssembly = Assembly.GetAssembly(typeof(INewsService));
+            builder.RegisterAssemblyTypes(servicesAssembly).AsImplementedInterfaces();
 
-            //var anotherServicesAssembly = Assembly.GetAssembly(typeof(IImageProcessService));
-            //builder.RegisterAssemblyTypes(anotherServicesAssembly).AsImplementedInterfaces();
+            var anotherServicesAssembly = Assembly.GetAssembly(typeof(IImageProcessService));
+            builder.RegisterAssemblyTypes(anotherServicesAssembly).AsImplementedInterfaces();
         }
     }
 }
