@@ -44,7 +44,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\EssentialNewsMvc.Services.Infrastructure\EssentialNewsMvc.Services.Infrastructure.csproj">
+      <Project>{EE56E1E4-7E08-457E-B462-E9458A399EBB}</Project>
+      <Name>EssentialNewsMvc.Services.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EssentialNewsMvc.Data.Common\EssentialNewsMvc.Data.Common.csproj">
       <Project>{2F240F3D-DBEC-44DD-873A-C547FEC03FC2}</Project>
       <Name>EssentialNewsMvc.Data.Common</Name>

@@ -224,6 +224,16 @@
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Resources\Images\image1.jpg" />
+    <Content Include="App_Data\Resources\Images\image10.jpg" />
+    <Content Include="App_Data\Resources\Images\image2.jpg" />
+    <Content Include="App_Data\Resources\Images\image3.jpg" />
+    <Content Include="App_Data\Resources\Images\image4.jpg" />
+    <Content Include="App_Data\Resources\Images\image5.jpg" />
+    <Content Include="App_Data\Resources\Images\image6.jpg" />
+    <Content Include="App_Data\Resources\Images\image7.jpg" />
+    <Content Include="App_Data\Resources\Images\image8.jpg" />
+    <Content Include="App_Data\Resources\Images\image9.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -278,9 +288,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
