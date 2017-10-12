@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 20px;
 }
 
@@ -17,8 +17,49 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
+}*/
+.carousel img {
+    min-width: 100%;
 }
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.navbar-fixed-top {
+    -webkit-backface-visibility: hidden;
+}
+
+.article-info {
+    padding-top: 90px
+}
+
+.account-form input,
+.account-form select,
+.account-form textarea {
+    max-width: 280px;
+}
+
+.hovereffect {
+    overflow: hidden;
+}
+
+    .hovereffect img {
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        vertical-align: middle;
+    }
+
+    .hovereffect:hover img {
+        -webkit-transform: scale(1.2); /* Safari and Chrome */
+        -moz-transform: scale(1.2); /* Firefox */
+        -ms-transform: scale(1.2); /* IE 9 */
+        -o-transform: scale(1.2); /* Opera */
+        transform: scale(1.2);
+    }
