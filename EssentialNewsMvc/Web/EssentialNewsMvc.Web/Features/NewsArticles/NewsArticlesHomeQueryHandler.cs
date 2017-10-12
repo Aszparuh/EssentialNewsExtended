@@ -2,13 +2,12 @@
 using EssentialNewsMvc.Infrastructure.Mappings;
 using EssentialNewsMvc.Web.ViewModels.Home;
 using MediatR;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
 namespace EssentialNewsMvc.Web.Features.NewsArticles
 {
-    public class NewsArticlesHomeQueryHandler : IRequestHandler<NewsArticlesHomeQuery, List<NewsArticleIndexViewModel>>
+    public class NewsArticlesHomeQueryHandler : IRequestHandler<NewsArticlesHomeQuery, HomeViewModel>
     {
         private readonly ApplicationDbContext context;
 
@@ -17,13 +16,27 @@ namespace EssentialNewsMvc.Web.Features.NewsArticles
             this.context = context;
         }
 
-        public List<NewsArticleIndexViewModel> Handle(NewsArticlesHomeQuery message)
+        HomeViewModel IRequestHandler<NewsArticlesHomeQuery, HomeViewModel>.Handle(NewsArticlesHomeQuery message)
         {
-            return this.context.NewsArticles
+            var allArticles = this.context.NewsArticles
                 .Where(x => !x.IsDeleted)
+                .OrderBy(x => x.CreatedOn)
+                .Skip(4)
                 .Take(10)
                 .To<NewsArticleIndexViewModel>()
                 .ToList();
+            var carouselArticles = this.context.NewsArticles
+                .Where(x => !x.IsDeleted)
+                .OrderBy(x => x.CreatedOn)
+                .Take(4).To<ArticleCarouselViewModel>()
+                .ToList();
+            HomeViewModel model = new HomeViewModel()
+            {
+                Articles = allArticles,
+                TopNews = carouselArticles
+            };
+
+            return model;
         }
     }
 }

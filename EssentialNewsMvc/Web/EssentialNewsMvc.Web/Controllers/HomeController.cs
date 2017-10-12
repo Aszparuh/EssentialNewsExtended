@@ -1,7 +1,6 @@
 ﻿using EssentialNewsMvc.Web.Features.NewsArticles;
 using EssentialNewsMvc.Web.ViewModels.Home;
 using MediatR;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -19,13 +18,7 @@ namespace EssentialNewsMvc.Web.Controllers
         public async Task<ActionResult> Index()
         {
             var news = await GetNewsAsync();
-            var viewModel = new HomeViewModel()
-            {
-                Articles = news,
-                TopNews = null
-            };
-
-            return View(viewModel);
+            return View(news);
         }
 
         public ActionResult About()
@@ -42,7 +35,7 @@ namespace EssentialNewsMvc.Web.Controllers
             return View();
         }
 
-        private async Task<List<NewsArticleIndexViewModel>> GetNewsAsync()
+        private async Task<HomeViewModel> GetNewsAsync()
         {
             return await mediator.Send(new NewsArticlesHomeQuery());
         }
