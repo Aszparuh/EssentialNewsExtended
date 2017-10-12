@@ -267,7 +267,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -330,10 +332,6 @@
     <ProjectReference Include="..\..\Data\EssentialNewsMvc.Data\EssentialNewsMvc.Data.csproj">
       <Project>{45b37b4a-a2a7-4e3b-b381-cfc905c6a43c}</Project>
       <Name>EssentialNewsMvc.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Services\EssentialNewsMvc.Services.Data\EssentialNewsMvc.Services.Data.csproj">
-      <Project>{6E0105DD-5A31-4434-BE4D-AF585EAFD15F}</Project>
-      <Name>EssentialNewsMvc.Services.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\EssentialNewsMvc.Services.Infrastructure\EssentialNewsMvc.Services.Infrastructure.csproj">
       <Project>{EE56E1E4-7E08-457E-B462-E9458A399EBB}</Project>

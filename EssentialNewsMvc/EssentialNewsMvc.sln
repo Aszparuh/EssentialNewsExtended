@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssentialNewsMvc.Services.Infrastructure", "Services\EssentialNewsMvc.Services.Infrastructure\EssentialNewsMvc.Services.Infrastructure.csproj", "{EE56E1E4-7E08-457E-B462-E9458A399EBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssentialNewsMvc.Services.Data", "Services\EssentialNewsMvc.Services.Data\EssentialNewsMvc.Services.Data.csproj", "{6E0105DD-5A31-4434-BE4D-AF585EAFD15F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssentialNewsMvc.Infrastructure", "Web\EssentialNewsMvc.Infrastructure\EssentialNewsMvc.Infrastructure.csproj", "{CC65D9F5-1EE9-41E7-A6B0-B889AE10AAB3}"
 EndProject
 Global
@@ -57,10 +55,6 @@ Global
 		{EE56E1E4-7E08-457E-B462-E9458A399EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE56E1E4-7E08-457E-B462-E9458A399EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE56E1E4-7E08-457E-B462-E9458A399EBB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E0105DD-5A31-4434-BE4D-AF585EAFD15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E0105DD-5A31-4434-BE4D-AF585EAFD15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E0105DD-5A31-4434-BE4D-AF585EAFD15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E0105DD-5A31-4434-BE4D-AF585EAFD15F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC65D9F5-1EE9-41E7-A6B0-B889AE10AAB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC65D9F5-1EE9-41E7-A6B0-B889AE10AAB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC65D9F5-1EE9-41E7-A6B0-B889AE10AAB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,7 +70,6 @@ Global
 		{2F240F3D-DBEC-44DD-873A-C547FEC03FC2} = {D302DFF3-755D-4482-9ADA-F815A6A8868E}
 		{3D5E0C71-9876-453E-A830-8399C58892D4} = {D302DFF3-755D-4482-9ADA-F815A6A8868E}
 		{EE56E1E4-7E08-457E-B462-E9458A399EBB} = {3B005762-B3C4-4F4B-A340-750A06487B95}
-		{6E0105DD-5A31-4434-BE4D-AF585EAFD15F} = {3B005762-B3C4-4F4B-A340-750A06487B95}
 		{CC65D9F5-1EE9-41E7-A6B0-B889AE10AAB3} = {3DF76CD5-48CE-49E2-8AA3-A91A924881EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
