@@ -1,7 +1,9 @@
 ﻿using EssentialNewsMvc.Data;
 using EssentialNewsMvc.Data.Migrations;
+using EssentialNewsMvc.Infrastructure.Mappings;
 using EssentialNewsMvc.Web.App_Start;
 using System.Data.Entity;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -14,8 +16,8 @@ namespace EssentialNewsMvc.Web
         {
             ViewEnginesConfig.RegisterViewEngines(ViewEngines.Engines);
             AutofacConfig.RegisterAutofac();
-            //var autoMapperConfig = new AutoMapperConfig();
-            //autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
+            var autoMapperConfig = new AutoMapperConfig();
+            autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration > ());
 
             AreaRegistration.RegisterAllAreas();

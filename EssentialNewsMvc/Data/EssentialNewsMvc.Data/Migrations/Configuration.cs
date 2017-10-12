@@ -2,6 +2,7 @@ using EssentialNewsMvc.Data.Models;
 using EssentialNewsMvc.Services.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Migrations;
@@ -17,7 +18,7 @@ namespace EssentialNewsMvc.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             this.AutomaticMigrationDataLossAllowed = false;
         }
 
@@ -55,16 +56,21 @@ namespace EssentialNewsMvc.Data.Migrations
                 var user = userManager.FindByName("admin");
                 if (user == null)
                 {
-                    string adminUserName = ConfigurationManager.AppSettings["AdminUserName"];
-                    string adminEmail = ConfigurationManager.AppSettings["AdminEmail"];
-                    string adminPassword = ConfigurationManager.AppSettings["Password"];
+                    string adminUserName = "admin@admin.bg";
+                    string adminEmail = "admin@admin.bg";
+                    string adminPassword = "password1";
                     var newUser = new ApplicationUser()
                     {
                         UserName = adminUserName,
                         Email = adminEmail,
                         PhoneNumber = "5551234567",
                     };
-                    userManager.Create(newUser, adminPassword);
+                    IdentityResult result = userManager.Create(newUser, adminPassword);
+                    if (result.Succeeded == false)
+                    {
+                        throw new Exception(result.Errors.First());
+                    }
+                        
                     userManager.SetLockoutEnabled(newUser.Id, false);
                     userManager.AddToRole(newUser.Id, "Admin");
                 }

@@ -1,16 +1,31 @@
-﻿using System;
+﻿using EssentialNewsMvc.Web.Features.NewsArticles;
+using EssentialNewsMvc.Web.ViewModels.Home;
+using MediatR;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace EssentialNewsMvc.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IMediator mediator;
+
+        public HomeController(IMediator mediator)
         {
-            return View();
+            this.mediator = mediator;
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            var news = await GetNewsAsync();
+            var viewModel = new HomeViewModel()
+            {
+                Articles = news,
+                TopNews = null
+            };
+
+            return View(news);
         }
 
         public ActionResult About()
@@ -25,6 +40,11 @@ namespace EssentialNewsMvc.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        private async Task<List<NewsArticleIndexViewModel>> GetNewsAsync()
+        {
+            return await mediator.Send(new NewsArticlesHomeQuery());
         }
     }
 }
