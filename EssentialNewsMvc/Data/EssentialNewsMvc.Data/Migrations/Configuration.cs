@@ -56,21 +56,16 @@ namespace EssentialNewsMvc.Data.Migrations
                 var user = userManager.FindByName("admin");
                 if (user == null)
                 {
-                    string adminUserName = "admin@admin.bg";
-                    string adminEmail = "admin@admin.bg";
-                    string adminPassword = "password1";
+                    string adminUserName = ConfigurationManager.AppSettings["AdminUserName"];
+                    string adminEmail = ConfigurationManager.AppSettings["AdminEmail"];
+                    string adminPassword = ConfigurationManager.AppSettings["Password"];
                     var newUser = new ApplicationUser()
                     {
                         UserName = adminUserName,
                         Email = adminEmail,
                         PhoneNumber = "5551234567",
                     };
-                    IdentityResult result = userManager.Create(newUser, adminPassword);
-                    if (result.Succeeded == false)
-                    {
-                        throw new Exception(result.Errors.First());
-                    }
-                        
+                    userManager.Create(newUser, adminPassword);
                     userManager.SetLockoutEnabled(newUser.Id, false);
                     userManager.AddToRole(newUser.Id, "Admin");
                 }
@@ -201,6 +196,6 @@ namespace EssentialNewsMvc.Data.Migrations
                        "Entity Validation Failed - errors follow:\n" +
                        sb.ToString(), ex);
             }
-        }
+        } 
     }
 }

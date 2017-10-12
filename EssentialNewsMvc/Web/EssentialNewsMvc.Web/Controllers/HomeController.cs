@@ -25,7 +25,7 @@ namespace EssentialNewsMvc.Web.Controllers
                 TopNews = null
             };
 
-            return View(news);
+            return View(viewModel);
         }
 
         public ActionResult About()
