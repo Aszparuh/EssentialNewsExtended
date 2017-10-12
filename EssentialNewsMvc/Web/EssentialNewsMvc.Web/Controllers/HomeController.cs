@@ -1,6 +1,7 @@
 ﻿using EssentialNewsMvc.Web.Features.NewsArticles;
 using EssentialNewsMvc.Web.ViewModels.Home;
 using MediatR;
+using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -8,6 +9,7 @@ namespace EssentialNewsMvc.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private const string ModelCacheKey = "ViewModel";
         private readonly IMediator mediator;
 
         public HomeController(IMediator mediator)
@@ -17,8 +19,13 @@ namespace EssentialNewsMvc.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var news = await GetNewsAsync();
-            return View(news);
+            if (this.HttpContext.Cache[ModelCacheKey] == null)
+            {
+                var news = await GetNewsAsync();
+                this.HttpContext.Cache.Insert(ModelCacheKey, news, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero);
+            }
+            var viewModel = this.HttpContext.Cache[ModelCacheKey];
+            return View(viewModel);
         }
 
         public ActionResult About()
