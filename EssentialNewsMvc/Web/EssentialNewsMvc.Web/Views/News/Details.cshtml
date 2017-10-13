@@ -1,0 +1,21 @@
+﻿@model EssentialNewsMvc.Web.ViewModels.News.DetailsViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>@Model.Title</h2>
+        <img src="~/File?id=@Model.ImageId" />
+        <hr />
+        <div>
+            <h4>
+                @Html.Raw(Model.Content)
+            </h4>
+        </div>
+    </div>
+    <div class="col-md-4">
+        @Html.Action("Index", "Aside")
+    </div>
+</div>
