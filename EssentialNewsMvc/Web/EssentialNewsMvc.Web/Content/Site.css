@@ -48,18 +48,18 @@ textarea {
     overflow: hidden;
 }
 
-    .hovereffect img {
-        -webkit-transition: all .2s ease-in-out;
-        -moz-transition: all .2s ease-in-out;
-        -o-transition: all .2s ease-in-out;
-        transition: all .2s ease-in-out;
-        vertical-align: middle;
-    }
+.hovereffect img {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    vertical-align: middle;
+}
 
-    .hovereffect:hover img {
-        -webkit-transform: scale(1.2); /* Safari and Chrome */
-        -moz-transform: scale(1.2); /* Firefox */
-        -ms-transform: scale(1.2); /* IE 9 */
-        -o-transform: scale(1.2); /* Opera */
-        transform: scale(1.2);
-    }
+ .hovereffect:hover img {
+     -webkit-transform: scale(1.2); /* Safari and Chrome */
+     -moz-transform: scale(1.2); /* Firefox */
+     -ms-transform: scale(1.2); /* IE 9 */
+     -o-transform: scale(1.2); /* Opera */
+     transform: scale(1.2);
+ }
