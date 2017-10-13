@@ -2,7 +2,6 @@ using EssentialNewsMvc.Data.Models;
 using EssentialNewsMvc.Services.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Migrations;

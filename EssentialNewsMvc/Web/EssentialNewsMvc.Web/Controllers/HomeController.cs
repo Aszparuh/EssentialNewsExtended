@@ -24,6 +24,7 @@ namespace EssentialNewsMvc.Web.Controllers
                 var news = await GetNewsAsync();
                 this.HttpContext.Cache.Insert(ModelCacheKey, news, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero);
             }
+
             var viewModel = this.HttpContext.Cache[ModelCacheKey];
             return View(viewModel);
         }

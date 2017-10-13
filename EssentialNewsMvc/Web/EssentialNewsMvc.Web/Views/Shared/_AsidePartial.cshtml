@@ -1,0 +1,52 @@
+﻿@model EssentialNewsMvc.Web.ViewModels.Partials.AsideViewModel
+<div id="exTab2">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active">
+            <a href="#1" data-toggle="tab">Most Visited</a>
+        </li>
+        <li>
+            <a href="#2" data-toggle="tab">Recent</a>
+        </li>
+    </ul>
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="1">
+            <div class="panel-body">
+                @foreach (var article in Model.MostVisitedArticles)
+                {
+                    <div class="row well-sm hovereffect">
+                        <a href="/Details/@article.Id?name=@article.Title" class="media-left">
+                            <div class="hovereffect">
+                                <img src="~/File?id=@article.SmallThumbnailId" height="106" , width="141" />
+                            </div>
+                        </a>
+                        <div class="media-body">
+                            <h5>
+                                <a href="/Details/@article.Id?name=@article.Title">@article.Title</a>
+                            </h5>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="tab-pane" id="2">
+            <div class="panel-body">
+                @foreach (var article in Model.RecentArticles)
+                {
+                    <div class="row well-sm hovereffect">
+                        <a href="/Details/@article.Id?name=@article.Title" class="media-left">
+                            <div class="hovereffect">
+                                <img src="~/File?id=@article.SmallThumbnailId" height="106" , width="141" />
+                            </div>
+                        </a>
+                        <div class="media-body">
+                            <h5>
+                                <a href="/Details/@article.Id?name=@article.Title">@article.Title</a>
+                            </h5>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

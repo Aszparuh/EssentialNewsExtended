@@ -204,11 +204,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEnginesConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsideController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Features\Files\ImageByIdQuery.cs" />
     <Compile Include="Features\Files\ImageByIdQueryHandler.cs" />
+    <Compile Include="Features\NewsArticles\AsideArticlesQuery.cs" />
+    <Compile Include="Features\NewsArticles\AsideArticlesQueryHandler.cs" />
     <Compile Include="Features\NewsArticles\NewsArticlesHomeQuery.cs" />
     <Compile Include="Features\NewsArticles\NewsArticlesHomeQueryHandler.cs" />
     <Compile Include="Global.asax.cs">
@@ -236,6 +239,8 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Partials\AsideViewModel.cs" />
+    <Compile Include="ViewModels\Partials\NewsArticleAsideViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Resources\Images\image1.jpg" />
@@ -304,8 +309,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_CarouselPartial.cshtml" />
+    <Content Include="Views\Shared\_AsidePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Aside\" />
     <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
