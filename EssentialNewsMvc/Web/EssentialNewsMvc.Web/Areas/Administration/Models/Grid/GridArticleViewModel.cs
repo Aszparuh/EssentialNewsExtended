@@ -10,6 +10,8 @@ namespace EssentialNewsMvc.Web.Areas.Administration.Models.Grid
 
         public string Content { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? DeletedOn { get; set; }

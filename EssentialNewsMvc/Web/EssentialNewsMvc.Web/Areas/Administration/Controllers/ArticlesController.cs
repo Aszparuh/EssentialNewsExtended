@@ -31,7 +31,8 @@ namespace EssentialNewsMvc.Web.Areas.Administration.Controllers
                         t.Content,
                         t.Author.UserName,
                         t.CreatedOn,
-                        t.DeletedOn
+                        t.DeletedOn,
+                        t.IsDeleted
                     });
             int totalRecords = articlesList.Count();
             var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
@@ -63,6 +64,7 @@ namespace EssentialNewsMvc.Web.Areas.Administration.Controllers
             article.Content = model.Content;
             article.CreatedOn = model.CreatedOn;
             article.DeletedOn = model.DeletedOn;
+            article.IsDeleted = model.IsDeleted;
             string msg;
             try
             {
@@ -87,8 +89,10 @@ namespace EssentialNewsMvc.Web.Areas.Administration.Controllers
         public string Delete(string Id)
         {
             ApplicationDbContext context = new ApplicationDbContext();
-            NewsArticle article = context.NewsArticles.Find(Id);
+            int articleId = int.Parse(Id);
+            NewsArticle article = context.NewsArticles.Find(articleId);
             article.IsDeleted = true;
+            article.DeletedOn = DateTime.Now;
             context.SaveChanges();
             return "Deleted successfully";
         }
