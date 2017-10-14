@@ -51,6 +51,13 @@ namespace EssentialNewsMvc.Data.Migrations
                     roleManager.Create(role);
                 }
 
+                var journalistRole = roleManager.FindByName("Journalist");
+                if (journalistRole == null)
+                {
+                    journalistRole = new IdentityRole("Admin");
+                    roleManager.Create(journalistRole);
+                }
+
                 // Create test users
                 var user = userManager.FindByName("admin");
                 if (user == null)
