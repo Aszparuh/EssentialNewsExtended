@@ -75,6 +75,23 @@ namespace EssentialNewsMvc.Data.Migrations
                     userManager.SetLockoutEnabled(newUser.Id, false);
                     userManager.AddToRole(newUser.Id, "Admin");
                 }
+
+                var journalistUser = userManager.FindByName("journalist");
+                if (journalistUser == null)
+                {
+                    string journalistUserName = "journalist";
+                    string journalistEmail = "journalist@admin.bg";
+                    string journalistPassword = "Password1";
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = journalistUserName,
+                        Email = journalistEmail,
+                        PhoneNumber = "5551234567",
+                    };
+                    userManager.Create(newUser, journalistPassword);
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Journalist");
+                }
             }
 
             // seed Categories
