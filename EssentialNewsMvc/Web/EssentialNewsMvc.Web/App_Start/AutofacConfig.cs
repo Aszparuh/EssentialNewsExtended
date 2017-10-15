@@ -14,6 +14,12 @@ namespace EssentialNewsMvc.Web.App_Start
 {
     public static class AutofacConfig
     {
+        public static IContainer Container
+        {
+            get;
+            private set;
+        }
+
         public static void RegisterAutofac()
         {
             var builder = new ContainerBuilder();
@@ -38,8 +44,8 @@ namespace EssentialNewsMvc.Web.App_Start
             RegisterServices(builder);
 
             // Set the dependency resolver to be Autofac.
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            Container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(Container));
         }
 
         private static void RegisterServices(ContainerBuilder builder)
