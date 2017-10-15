@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsideControllerTests\Constructor_Should.cs" />
+    <Compile Include="AsideControllerTests\Index_Should.cs" />
     <Compile Include="HomeControllerTests\ConstructorShould.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
