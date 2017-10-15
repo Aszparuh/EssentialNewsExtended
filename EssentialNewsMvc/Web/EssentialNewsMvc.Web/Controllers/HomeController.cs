@@ -1,7 +1,5 @@
-﻿using EssentialNewsMvc.Web.Features.NewsArticles;
-using EssentialNewsMvc.Web.ViewModels.Home;
-using MediatR;
-using System;
+﻿using Bytes2you.Validation;
+using EssentialNewsMvc.Web.Caching;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -10,22 +8,17 @@ namespace EssentialNewsMvc.Web.Controllers
     public class HomeController : Controller
     {
         private const string ModelCacheKey = "ViewModel";
-        private readonly IMediator mediator;
+        private readonly INewsCacheService newsCacheService;
 
-        public HomeController(IMediator mediator)
+        public HomeController(INewsCacheService newsCacheService)
         {
-            this.mediator = mediator;
+            Guard.WhenArgument(newsCacheService, "news cache service").IsNull().Throw();
+            this.newsCacheService = newsCacheService;
         }
 
         public async Task<ActionResult> Index()
         {
-            if (this.HttpContext.Cache[ModelCacheKey] == null)
-            {
-                var news = await GetNewsAsync();
-                this.HttpContext.Cache.Insert(ModelCacheKey, news, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero);
-            }
-
-            var viewModel = this.HttpContext.Cache[ModelCacheKey];
+            var viewModel = await this.newsCacheService.IndexArticles();
             return View(viewModel);
         }
 
@@ -41,11 +34,6 @@ namespace EssentialNewsMvc.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        private async Task<HomeViewModel> GetNewsAsync()
-        {
-            return await mediator.Send(new NewsArticlesHomeQuery());
         }
     }
 }

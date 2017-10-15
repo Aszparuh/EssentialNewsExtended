@@ -21,5 +21,17 @@ namespace EssentialNewsMvc.Tests.UnitTests.AsideControllerTests
 
             mediator.Verify(x => x.Send(It.IsAny<AsideArticlesQuery>(), It.IsAny<CancellationToken>()), Times.Once());
         }
+
+        [Test]
+        public void ReturnView()
+        {
+            var mediator = new Mock<IMediator>();
+            mediator.Setup(m => m.Send(It.IsAny<AsideArticlesQuery>(), It.IsAny<CancellationToken>()));
+
+            var sut = new AsideController(mediator.Object);
+            var result = sut.Index();
+
+            Assert.That(result, Is.Not.Null);
+        }
     }
 }

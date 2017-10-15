@@ -211,6 +211,9 @@
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
     <Compile Include="Areas\Administration\Controllers\ArticlesController.cs" />
     <Compile Include="Areas\Administration\Models\Grid\GridArticleViewModel.cs" />
+    <Compile Include="Caching\BaseCacheService.cs" />
+    <Compile Include="Caching\INewsCacheService.cs" />
+    <Compile Include="Caching\NewsCacheService.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AsideController.cs" />
     <Compile Include="Controllers\FileController.cs" />
