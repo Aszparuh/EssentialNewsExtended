@@ -214,6 +214,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Features\AdministrationArticles\ArticlesGridQuery.cs" />
+    <Compile Include="Features\AdministrationArticles\ArticlesGridQueryHandler.cs" />
+    <Compile Include="Features\AdministrationArticles\DeleteArticleCommand.cs" />
+    <Compile Include="Features\AdministrationArticles\EditArticleCommand.cs" />
+    <Compile Include="Features\AdministrationArticles\EditArticleCommandHandler.cs" />
+    <Compile Include="Features\DeleteArticleCommandHandler.cs" />
     <Compile Include="Features\Files\ImageByIdQuery.cs" />
     <Compile Include="Features\Files\ImageByIdQueryHandler.cs" />
     <Compile Include="Features\NewsArticles\AsideArticlesQuery.cs" />

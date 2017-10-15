@@ -3,10 +3,12 @@
         url: "/Administration/Articles/GetArticles",
         datatype: 'json',
         mtype: 'Get',
+        //loadonce: true,
+        sortable: true,
         colNames: ['ID', 'Title', 'Content', 'Author', 'Deleted', 'Created On', 'Deleted On'],
         colModel: [
             { key: true, hidden: true, name: 'Id', index: 'Id', editable: true },
-            { key: false, name: 'Title', index: 'Title', editable: true },
+            { key: false, name: 'Title', index: 'Title', editable: true, sortable: true, sorttype: 'text' },
             { key: false, name: 'Content', index: 'Content', editable: true },
             { key: false, name: 'UserName', index: 'UserName', editable: false },
             { key: false, name: 'IsDeleted', index: 'IsDeleted', editable: true, edittype: 'select', editoptions: { value: { 'true': 'Deleted', 'false': 'Not Deleted' } } },

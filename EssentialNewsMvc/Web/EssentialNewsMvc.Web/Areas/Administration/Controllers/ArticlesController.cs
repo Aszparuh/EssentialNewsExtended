@@ -1,51 +1,36 @@
-﻿using EssentialNewsMvc.Data;
-using EssentialNewsMvc.Data.Models;
-using EssentialNewsMvc.Web.Areas.Administration.Models.Grid;
+﻿using EssentialNewsMvc.Web.Areas.Administration.Models.Grid;
+using EssentialNewsMvc.Web.Features.AdministrationArticles;
+using MediatR;
 using System;
-using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace EssentialNewsMvc.Web.Areas.Administration.Controllers
 {
     public class ArticlesController : AdminBaseController
     {
+        private readonly IMediator mediator;
+
+        public ArticlesController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
         // GET: Administration/Articles
         public ActionResult Index()
         {
             return View();
         }
 
-        public JsonResult GetArticles(string sidx, string sort, int page, int rows)
+        public async Task<JsonResult> GetArticles(string sidx, string sort, int page, int rows)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            sort = sort ?? "";
-            int pageIndex = Convert.ToInt32(page) - 1;
-            int pageSize = rows;
+            var articlesList = await mediator
+                .Send(new ArticlesGridQuery() { Sidx = sidx, Sort = sort, Page = page, Row = rows });
 
-            var articlesList = context.NewsArticles.Select(
-                    t => new
-                    {
-                        t.Id,
-                        t.Title,
-                        t.Content,
-                        t.Author.UserName,
-                        t.CreatedOn,
-                        t.DeletedOn,
-                        t.IsDeleted
-                    });
             int totalRecords = articlesList.Count();
             var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
-            if (sort.ToUpper() == "DESC")
-            {
-                articlesList = articlesList.OrderByDescending(t => t.CreatedOn);
-                articlesList = articlesList.Skip(pageIndex * pageSize).Take(pageSize);
-            }
-            else
-            {
-                articlesList = articlesList.OrderBy(t => t.CreatedOn);
-                articlesList = articlesList.Skip(pageIndex * pageSize).Take(pageSize);
-            }
+
             var jsonData = new
             {
                 total = totalPages,
@@ -56,23 +41,14 @@ namespace EssentialNewsMvc.Web.Areas.Administration.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public string Edit(GridArticleViewModel model)
+        public async Task<string> Edit(GridArticleViewModel model)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var article = context.NewsArticles.Find(model.Id);
-            article.Title = model.Title;
-            article.Content = model.Content;
-            article.CreatedOn = model.CreatedOn;
-            article.DeletedOn = model.DeletedOn;
-            article.IsDeleted = model.IsDeleted;
             string msg;
             try
             {
                 if (this.ModelState.IsValid)
                 {
-                    context.Entry(article).State = EntityState.Modified;
-                    context.SaveChanges();
-                    msg = "Saved Successfully";
+                    msg = await this.mediator.Send(new EditArticleCommand() { Model = model });
                 }
                 else
                 {
@@ -83,18 +59,13 @@ namespace EssentialNewsMvc.Web.Areas.Administration.Controllers
             {
                 msg = "Error occured:" + ex.Message;
             }
+
             return msg;
         }
 
-        public string Delete(string Id)
+        public async Task<string> Delete(string Id)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            int articleId = int.Parse(Id);
-            NewsArticle article = context.NewsArticles.Find(articleId);
-            article.IsDeleted = true;
-            article.DeletedOn = DateTime.Now;
-            context.SaveChanges();
-            return "Deleted successfully";
+            return await this.mediator.Send(new DeleteArticleCommand() { Id = Id });
         }
 
     }
