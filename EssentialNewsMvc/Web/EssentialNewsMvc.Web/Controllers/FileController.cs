@@ -1,4 +1,5 @@
-﻿using EssentialNewsMvc.Data.Models;
+﻿using Bytes2you.Validation;
+using EssentialNewsMvc.Data.Models;
 using EssentialNewsMvc.Web.Features.Files;
 using MediatR;
 using System;
@@ -15,6 +16,7 @@ namespace EssentialNewsMvc.Web.Controllers
 
         public FileController(IMediator mediator)
         {
+            Guard.WhenArgument(mediator, "mediator").IsNull().Throw();
             this.mediator = mediator;
         }
 

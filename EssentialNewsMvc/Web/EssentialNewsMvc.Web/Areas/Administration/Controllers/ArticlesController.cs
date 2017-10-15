@@ -1,4 +1,5 @@
-﻿using EssentialNewsMvc.Web.Areas.Administration.Models.Grid;
+﻿using Bytes2you.Validation;
+using EssentialNewsMvc.Web.Areas.Administration.Models.Grid;
 using EssentialNewsMvc.Web.Features.AdministrationArticles;
 using MediatR;
 using System;
@@ -14,6 +15,7 @@ namespace EssentialNewsMvc.Web.Areas.Administration.Controllers
 
         public ArticlesController(IMediator mediator)
         {
+            Guard.WhenArgument(mediator, "mediator").IsNull().Throw();
             this.mediator = mediator;
         }
 
