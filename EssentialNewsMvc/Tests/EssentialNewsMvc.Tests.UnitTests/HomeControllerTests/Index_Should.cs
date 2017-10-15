@@ -1,10 +1,10 @@
 ﻿using EssentialNewsMvc.Web.Caching;
 using EssentialNewsMvc.Web.Controllers;
-using EssentialNewsMvc.Web.Features.NewsArticles;
-using MediatR;
+using EssentialNewsMvc.Web.ViewModels.Home;
 using Moq;
 using NUnit.Framework;
-using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace EssentialNewsMvc.Tests.UnitTests.HomeControllerTests
 {
@@ -23,14 +23,16 @@ namespace EssentialNewsMvc.Tests.UnitTests.HomeControllerTests
         }
 
         [Test]
-        public void ReturnView()
+        public async Task ReturnViewAsync()
         {
+            var model = new HomeViewModel();
             var newsService = new Mock<INewsCacheService>();
+            newsService.Setup(x => x.IndexArticles()).Returns(Task.FromResult(model));
 
             var sut = new HomeController(newsService.Object);
-            var result = sut.Index();
+            var result = await sut.Index();
 
-            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf(typeof(ViewResult)));
         }
     }
 }

@@ -98,6 +98,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\EssentialNewsMvc.Data.Models\EssentialNewsMvc.Data.Models.csproj">
+      <Project>{3D5E0C71-9876-453E-A830-8399C58892D4}</Project>
+      <Name>EssentialNewsMvc.Data.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Web\EssentialNewsMvc.Web\EssentialNewsMvc.Web.csproj">
       <Project>{278F4790-C2AE-4506-A741-EC50DC2B641D}</Project>
       <Name>EssentialNewsMvc.Web</Name>
