@@ -1,0 +1,35 @@
+﻿@model EssentialNewsMvc.Web.ViewModels.Home.NewsArticleIndexViewModel
+<div class="row well-sm hovereffect">
+    @if (Model.ThumbnailId != null)
+    {
+        <a href="/Details/@Model.Id?name=@Model.Title" class="media-left">
+            <div class="hovereffect">
+                <img src="~/File?id=@Model.ThumbnailId" height="180" , width="260" />
+            </div>
+        </a>
+    }
+
+    <div class="media-body">
+        <a href="/Details/@Model.Id?name=@Model.Title">
+            <h4>
+                @Model.Title
+            </h4>
+        </a>
+
+        <p class="hidden-xs">@Html.Raw(Model.SampleContent)</p>
+        <div class="article-info">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-time"></span>
+                <time>@Model.CreatedOn.</time>
+            </div>
+            <div>
+                @if (Model.UserName != null)
+                {
+                    <span class="glyphicon glyphicon-user"></span>
+                                <span>@Model.UserName</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<hr />

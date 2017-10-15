@@ -763,6 +763,8 @@
     <Content Include="Views\Shared\_AsidePartial.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NewsArticleIndexViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateNewsViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\AdminBase\" />

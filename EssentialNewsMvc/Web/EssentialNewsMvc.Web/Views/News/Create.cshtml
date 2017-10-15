@@ -6,75 +6,7 @@
 
 <h2>Write new article</h2>
 
-
-@using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group row">
-            <div class="col-md-12">
-                @Html.LabelFor(model => model.Title, new { @class = "control-label" })
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-12">
-                <div>
-                    @Html.CheckBoxFor(model => model.IsTop)
-                    @Html.LabelFor(model => model.IsTop, new { @class = "control-label" })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-1">
-                @Html.LabelFor(model => model.NewsCategoryId, new { @class = "control-label" })
-            </div>
-            <div class="col-md-3">
-                @Html.DropDownListFor(model => model.NewsCategoryId, Model.NewsCategories, string.Empty, new { @class = "form-control btn btn-default" })
-                @Html.ValidationMessageFor(model => model.NewsCategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-1">
-                @Html.LabelFor(model => model.RegionId, new { @class = "control-label" })
-            </div>
-            <div class="col-md-3">
-                @Html.DropDownListFor(model => model.RegionId, Model.Regions, string.Empty, new { @class = "form-control btn btn-default" })
-                @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-3">
-                @Html.TextBoxFor(model => model.Upload, new { title = "Upload Image", type = "file" })
-                @*<input type="file" title="Upload Image" name="upload">*@
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-12">
-                @Html.TextAreaFor(model => model.Content, new { @class = "ckeditor", id = "editor1" })
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-12">
-                @Html.LabelFor(model => model.SampleContent, new { @class = "control-label" })
-                @Html.TextAreaFor(model => model.SampleContent, new { @class = "form-control", placeholder = "First sentences of the article or subtitle" })
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+@Html.EditorForModel()
 
 <div>
     @Html.ActionLink("Back to List", "Index")
