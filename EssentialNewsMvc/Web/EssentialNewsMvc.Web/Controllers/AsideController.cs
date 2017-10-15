@@ -1,4 +1,5 @@
-﻿using EssentialNewsMvc.Web.Features.NewsArticles;
+﻿using Bytes2you.Validation;
+using EssentialNewsMvc.Web.Features.NewsArticles;
 using EssentialNewsMvc.Web.ViewModels.Partials;
 using MediatR;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace EssentialNewsMvc.Web.Controllers
 
         public AsideController(IMediator mediator)
         {
+            Guard.WhenArgument(mediator, "mediator").IsNull().Throw();
             this.mediator = mediator;
         }
 
