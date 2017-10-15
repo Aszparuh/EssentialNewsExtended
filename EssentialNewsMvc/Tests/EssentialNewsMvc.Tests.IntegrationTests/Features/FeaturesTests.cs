@@ -1,14 +1,18 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using AutoMapper;
 using EssentialNewsMvc.Data;
 using EssentialNewsMvc.Data.Models;
+using EssentialNewsMvc.Infrastructure.Mappings;
 using EssentialNewsMvc.Web.App_Start;
 using EssentialNewsMvc.Web.Features.NewsArticles;
+using EssentialNewsMvc.Web.ViewModels.Account;
 using EssentialNewsMvc.Web.ViewModels.Partials;
 using MediatR;
 using NUnit.Framework;
 using Respawn;
 using System.Configuration;
+using System.Reflection;
 using System.Web.Mvc;
 
 namespace EssentialNewsMvc.Tests.IntegrationTests.Features
@@ -24,6 +28,9 @@ namespace EssentialNewsMvc.Tests.IntegrationTests.Features
         [SetUp]
         public void Init()
         {
+            Assembly asm = typeof(LoginViewModel).Assembly;
+            var autoMapperConfig = new AutoMapperConfig();
+            autoMapperConfig.Execute(asm);
             AutofacConfig.RegisterAutofac();
             container = AutofacConfig.Container;
             this.scopeProvider = new SimpleLifetimeScopeProvider(container);
@@ -43,6 +50,7 @@ namespace EssentialNewsMvc.Tests.IntegrationTests.Features
         [Test]
         public void AsideArticleHandlerShould_GetArticles()
         {
+            
             var handler = DependencyResolver.Current.GetService<IRequestHandler<AsideArticlesQuery, AsideViewModel>>();
             var dbContext = DependencyResolver.Current.GetService<ApplicationDbContext>();
             var article = new NewsArticle()
