@@ -4,6 +4,7 @@ using EssentialNewsMvc.Data;
 using EssentialNewsMvc.Data.Models;
 using EssentialNewsMvc.Infrastructure.Mappings;
 using EssentialNewsMvc.Web.App_Start;
+using EssentialNewsMvc.Web.Areas.Administration.Models.Grid;
 using EssentialNewsMvc.Web.Features.AdministrationArticles;
 using EssentialNewsMvc.Web.Features.News;
 using EssentialNewsMvc.Web.Features.NewsArticles;
@@ -13,6 +14,7 @@ using EssentialNewsMvc.Web.ViewModels.Partials;
 using MediatR;
 using NUnit.Framework;
 using Respawn;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -130,6 +132,36 @@ namespace EssentialNewsMvc.Tests.IntegrationTests.Features
             });
         }
 
+        [Test]
+        public void EditArticleCommandHandlerShould_EditArticle()
+        {
+
+            var handler = DependencyResolver.Current.GetService<IRequestHandler<EditArticleCommand, string>>();
+            var dbContext = DependencyResolver.Current.GetService<ApplicationDbContext>();
+            var article = new NewsArticle()
+            {
+                Title = "SomeTitle",
+                Content = "SomeContent",
+                SampleContent = "SomeSampleContent"
+            };
+            var addedArticle = dbContext.NewsArticles.Add(article);
+            dbContext.SaveChanges();
+            dbContext.SaveChanges();
+            var model = new GridArticleViewModel()
+            {
+                Title = "New title",
+                Id = addedArticle.Id,
+                Content = "Some content",
+                IsDeleted = false,
+                CreatedOn = DateTime.Now
+            };
+            var result = handler.Handle(new EditArticleCommand() { Model = model });
+            var dbArticle = dbContext.NewsArticles.Find(addedArticle.Id);
+            
+            Assert.That(dbArticle.Title, Is.EqualTo("New title"));
+            
+
+        }
 
         //[Test]
         //public void CreateAtricleCommandHandlerShould_CreateArticles()
