@@ -1,27 +1,22 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using AutoMapper;
 using EssentialNewsMvc.Data;
 using EssentialNewsMvc.Data.Models;
 using EssentialNewsMvc.Infrastructure.Mappings;
 using EssentialNewsMvc.Web.App_Start;
 using EssentialNewsMvc.Web.Features.AdministrationArticles;
+using EssentialNewsMvc.Web.Features.News;
 using EssentialNewsMvc.Web.Features.NewsArticles;
 using EssentialNewsMvc.Web.ViewModels.Account;
 using EssentialNewsMvc.Web.ViewModels.News;
 using EssentialNewsMvc.Web.ViewModels.Partials;
 using MediatR;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Moq;
 using NUnit.Framework;
 using Respawn;
+using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Web;
-using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace EssentialNewsMvc.Tests.IntegrationTests.Features
@@ -98,6 +93,41 @@ namespace EssentialNewsMvc.Tests.IntegrationTests.Features
             var dbArticle = dbContext.NewsArticles.Find(addedArticle.Id);
 
            Assert.That(dbArticle.IsDeleted, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void RegionsCategoriesQueryHandlerShould_GetRegionsAndCategories()
+        {
+
+            var handler = DependencyResolver.Current.GetService<IRequestHandler<CategoriesRegionsQuery, CreateNewsViewModel>>();
+            var dbContext = DependencyResolver.Current.GetService<ApplicationDbContext>();
+            var regions = new List<Region>()
+            {
+                new Region() { Name = "Some" },
+                new Region() { Name = "Other" }
+            };
+            var categories = new List<NewsCategory>()
+            {
+                new NewsCategory() { Name = "Some" },
+                new NewsCategory() { Name = "Other" }
+            };
+            foreach (var region in regions)
+            {
+                dbContext.Regions.Add(region);
+            }
+
+            foreach (var category in categories)
+            {
+                dbContext.Categories.Add(category);
+            }
+
+            dbContext.SaveChanges();
+
+            var result = handler.Handle(new CategoriesRegionsQuery());
+            Assert.Multiple(() => {
+                Assert.That(result.Regions.Count(), Is.EqualTo(2), "Number of regions");
+                Assert.That(result.NewsCategories.Count(), Is.EqualTo(2), "Number of categories");
+            });
         }
 
 

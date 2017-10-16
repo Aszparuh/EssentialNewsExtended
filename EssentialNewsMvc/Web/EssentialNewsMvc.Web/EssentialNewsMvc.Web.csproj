@@ -370,7 +370,6 @@
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
     <Content Include="Areas\Administration\Views\web.config" />
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Administration\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Articles\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -774,6 +773,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\AdminBase\" />
+    <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="Views\Aside\" />
     <Folder Include="Views\File\" />
   </ItemGroup>
