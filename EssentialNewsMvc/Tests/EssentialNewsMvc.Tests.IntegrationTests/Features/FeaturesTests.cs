@@ -159,8 +159,34 @@ namespace EssentialNewsMvc.Tests.IntegrationTests.Features
             var dbArticle = dbContext.NewsArticles.Find(addedArticle.Id);
             
             Assert.That(dbArticle.Title, Is.EqualTo("New title"));
-            
+        }
 
+        [Test]
+        public void ArticleGridQueryHandlerShould_GetArticles()
+        {
+
+            var handler = DependencyResolver.Current.GetService<IRequestHandler<ArticlesGridQuery, List<GridArticleViewModel>>>();
+            var dbContext = DependencyResolver.Current.GetService<ApplicationDbContext>();
+            var article = new NewsArticle()
+            {
+                Title = "SomeTitle",
+                Content = "SomeContent",
+                SampleContent = "SomeSampleContent"
+            };
+            var addedArticle = dbContext.NewsArticles.Add(article);
+            dbContext.SaveChanges();
+            dbContext.SaveChanges();
+            var model = new GridArticleViewModel()
+            {
+                Title = "New title",
+                Id = addedArticle.Id,
+                Content = "Some content",
+                IsDeleted = false,
+                CreatedOn = DateTime.Now
+            };
+            var result = handler.Handle(new ArticlesGridQuery() { Sidx = "", Sort = "", Page = 1, Row = 2 });
+            
+            Assert.That(result, Is.Not.Empty);
         }
 
         //[Test]
