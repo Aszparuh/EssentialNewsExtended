@@ -20,9 +20,10 @@ namespace EssentialNewsMvc.Tests.UnitTests.NewsControllerTests
         public void CallMediatorOnGet()
         {
             var mediator = new Mock<IMediator>();
+            var sanitizeService = new Mock<Services.Infrastructure.Contracts.ISanitizeService>();
             mediator.Setup(m => m.Send(It.IsAny<CategoriesRegionsQuery>(), It.IsAny<CancellationToken>()));
 
-            var sut = new NewsController(mediator.Object);
+            var sut = new NewsController(mediator.Object, sanitizeService.Object);
             var result = sut.Create();
 
             mediator.Verify(x => x.Send(It.IsAny<CategoriesRegionsQuery>(), It.IsAny<CancellationToken>()), Times.Once());
@@ -34,10 +35,11 @@ namespace EssentialNewsMvc.Tests.UnitTests.NewsControllerTests
             var article = new CreateNewsViewModel();
 
             var mediator = new Mock<IMediator>();
+            var sanitizeService = new Mock<Services.Infrastructure.Contracts.ISanitizeService>();
             mediator.Setup(m => m.Send(It.IsAny<CategoriesRegionsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(article));
 
-            var sut = new NewsController(mediator.Object);
+            var sut = new NewsController(mediator.Object, sanitizeService.Object);
             var result = await sut.Create();
 
             Assert.That(result, Is.InstanceOf(typeof(ViewResult)));
@@ -59,9 +61,10 @@ namespace EssentialNewsMvc.Tests.UnitTests.NewsControllerTests
                 Upload = file.Object,
             };
             var mediator = new Mock<IMediator>();
+            var sanitizeService = new Mock<Services.Infrastructure.Contracts.ISanitizeService>();
             mediator.Setup(m => m.Send(It.IsAny<CategoriesRegionsQuery>(), It.IsAny<CancellationToken>()));
 
-            var sut = new NewsController(mediator.Object);
+            var sut = new NewsController(mediator.Object, sanitizeService.Object);
             var controllerContext = new Mock<ControllerContext>();
             var principal = new Mock<IPrincipal>();
             principal.Setup(p => p.IsInRole("Administrator")).Returns(true);
@@ -89,9 +92,10 @@ namespace EssentialNewsMvc.Tests.UnitTests.NewsControllerTests
                 Upload = file.Object,
             };
             var mediator = new Mock<IMediator>();
+            var sanitizeService = new Mock<Services.Infrastructure.Contracts.ISanitizeService>();
             mediator.Setup(m => m.Send(It.IsAny<CategoriesRegionsQuery>(), It.IsAny<CancellationToken>()));
 
-            var sut = new NewsController(mediator.Object);
+            var sut = new NewsController(mediator.Object, sanitizeService.Object);
             var controllerContext = new Mock<ControllerContext>();
             var principal = new Mock<IPrincipal>();
             principal.Setup(p => p.IsInRole("Administrator")).Returns(true);

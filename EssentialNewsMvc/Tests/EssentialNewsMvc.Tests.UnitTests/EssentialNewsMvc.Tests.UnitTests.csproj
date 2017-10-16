@@ -104,6 +104,10 @@
       <Project>{3D5E0C71-9876-453E-A830-8399C58892D4}</Project>
       <Name>EssentialNewsMvc.Data.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Services\EssentialNewsMvc.Services.Infrastructure\EssentialNewsMvc.Services.Infrastructure.csproj">
+      <Project>{EE56E1E4-7E08-457E-B462-E9458A399EBB}</Project>
+      <Name>EssentialNewsMvc.Services.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Web\EssentialNewsMvc.Web\EssentialNewsMvc.Web.csproj">
       <Project>{278F4790-C2AE-4506-A741-EC50DC2B641D}</Project>
       <Name>EssentialNewsMvc.Web</Name>

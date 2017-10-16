@@ -28,6 +28,10 @@
                     {
                         <li>@Html.ActionLink("Create new article", "Create", "News")</li>
                     }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Edit articles", "Index", "Articles", new { Area = "Administration" }, new { })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

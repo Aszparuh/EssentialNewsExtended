@@ -1,4 +1,5 @@
 ﻿using Bytes2you.Validation;
+using EssentialNewsMvc.Services.Infrastructure.Contracts;
 using EssentialNewsMvc.Web.Features.News;
 using EssentialNewsMvc.Web.Features.NewsArticles;
 using EssentialNewsMvc.Web.ViewModels.News;
@@ -12,11 +13,14 @@ namespace EssentialNewsMvc.Web.Controllers
     public class NewsController : Controller
     {
         private readonly IMediator mediator;
+        private readonly ISanitizeService sanitizeService;
 
-        public NewsController(IMediator mediator)
+        public NewsController(IMediator mediator, ISanitizeService sanitizeService)
         {
             Guard.WhenArgument(mediator, "mediator").IsNull().Throw();
+            Guard.WhenArgument(sanitizeService, "sanitize service").IsNull().Throw();
             this.mediator = mediator;
+            this.sanitizeService = sanitizeService;
         }
 
         // GET: News
@@ -26,6 +30,7 @@ namespace EssentialNewsMvc.Web.Controllers
 
             if (article != null && article.Title == name)
             {
+                article.Content = sanitizeService.Sanitize(article.Content);
                 return this.View(article);
             }
             else
