@@ -189,6 +189,27 @@ namespace EssentialNewsMvc.Tests.IntegrationTests.Features
             Assert.That(result, Is.Not.Empty);
         }
 
+        [Test]
+        public void NewsDetailsQueryHandlerShould_GetArticles()
+        {
+
+            var handler = DependencyResolver.Current.GetService<IRequestHandler<NewsDetailsQuery, DetailsViewModel>>();
+            var dbContext = DependencyResolver.Current.GetService<ApplicationDbContext>();
+            var article = new NewsArticle()
+            {
+                Title = "SomeTitle",
+                Content = "SomeContent",
+                SampleContent = "SomeSampleContent"
+            };
+            var addedArticle = dbContext.NewsArticles.Add(article);
+            dbContext.SaveChanges();
+            dbContext.SaveChanges();
+            
+            var result = handler.Handle(new NewsDetailsQuery() { Id = addedArticle.Id });
+
+            Assert.That(result.Title, Is.EqualTo(article.Title));
+        }
+
         //[Test]
         //public void CreateAtricleCommandHandlerShould_CreateArticles()
         //{
