@@ -49,10 +49,10 @@
       <doNotUseChcpCommand>false</doNotUseChcpCommand>
     </hudson.plugins.msbuild.MsBuildBuilder>
     <hudson.tasks.BatchFile>
-      <command>&quot;.\..\Build\EssentialNewsMvc\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe&quot; /config:Release &quot;.\..\Build\EssentialNewsMvc\Tests\EssentialNewsMvc.Tests.UnitTests\bin\Debug\EssentialNewsMvc.Tests.UnitTests.dll&quot; --result=junit-results.xml;format=nunit2</command>
+      <command>&quot;.\..\Build\EssentialNewsMvc\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe&quot; /config:Release &quot;.\..\Build\EssentialNewsMvc\Tests\EssentialNewsMvc.Tests.UnitTests\bin\Debug\EssentialNewsMvc.Tests.UnitTests.dll&quot; &quot;.\..\Build\EssentialNewsMvc\Tests\EssentialNewsMvc.Tests.IntegrationTests\bin\Debug\EssentialNewsMvc.Tests.IntegrationTests.dll&quot; --result=junit-results.xml;format=nunit2</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>&quot;.\..\Build\EssentialNewsMvc\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe&quot; -register:path64 -filter:&quot;+[*]*&quot; -target:&quot;.\..\Build\EssentialNewsMvc\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe&quot; -targetargs:&quot;/domain:single &quot;.\..\Build\EssentialNewsMvc\Tests\EssentialNewsMvc.Tests.UnitTests\bin\Debug\EssentialNewsMvc.Tests.UnitTests.dll\&quot; -output:open-cover.xml</command>
+      <command>&quot;.\..\Build\EssentialNewsMvc\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe&quot; -register:path64 -filter:&quot;+[*]* -[*.tests]* -[*.UnitTests]* -[Moq]* -[*.IntegrationTests]*&quot; -target:&quot;.\..\Build\EssentialNewsMvc\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe&quot; -targetargs:&quot;/domain:single \&quot;.\..\Build\EssentialNewsMvc\Tests\EssentialNewsMvc.Tests.UnitTests\bin\Debug\EssentialNewsMvc.Tests.UnitTests.dll\&quot; \&quot;.\..\Build\EssentialNewsMvc\Tests\EssentialNewsMvc.Tests.IntegrationTests\bin\Debug\EssentialNewsMvc.Tests.IntegrationTests.dll&quot; -output:open-cover.xml</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>&quot;.\..\Build\EssentialNewsMvc\packages\OpenCoverToCoberturaConverter.0.2.6.0\tools\OpenCoverToCoberturaConverter.exe&quot; -input:open-cover.xml -output:cobertura-result.xml -sources:&quot;.\&quot;</command>
